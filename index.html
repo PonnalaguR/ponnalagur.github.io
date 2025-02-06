@@ -201,6 +201,37 @@ span.psw {
         
     </section> 
     
+<!-- The API key below only works in JSFiddle. If you don't have an API key, go to [https://console.cloud.google.com/google/maps-apis/start] and then replace the key parameter below with your API key from your project. -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Locator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script>
+      const CONFIGURATION = {
+        "locations": [
+          {"title":"Hindi Tuition","address1":"5025 Ram Nagar North 4th street Madipakkam","address2":"Chennai, Tamil Nadu, India","coords":{"lat":12.9677776,"lng":80.2113802},"placeId":"ChIJMc7iVZxdUjoRrmSAORWjXKM"}
+        ],
+        "mapOptions": {"center":{"lat":38.0,"lng":-100.0},"fullscreenControl":true,"mapTypeControl":false,"streetViewControl":false,"zoom":4,"zoomControl":true,"maxZoom":17,"mapId":""},
+        "mapsApiKey": "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg",
+        "capabilities": {"input":false,"autocomplete":false,"directions":false,"distanceMatrix":false,"details":false,"actions":false}
+      };
+
+    </script>
+  </head>
+  <body>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/@googlemaps/extended-component-library/0.6.11/index.min.js"></script>
+
+    <!-- Uses components from the Extended Component Library; see
+         https://github.com/googlemaps/extended-component-library for more information
+         on these HTML tags and how to configure them. -->
+    <gmpx-api-loader key="AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg" solution-channel="GMP_QB_locatorplus_v11_c"></gmpx-api-loader>
+    <gmpx-store-locator map-id="DEMO_MAP_ID"></gmpx-store-locator>
+  </body>
+</html>
+    
     <!--services----------------------->
     <footer>
       <div class="footer__more">
@@ -218,6 +249,11 @@ span.psw {
                 modal.style.display = "none";
             }
         }
+        document.addEventListener('DOMContentLoaded', async () => {
+  await customElements.whenDefined('gmpx-store-locator');
+  const locator = document.querySelector('gmpx-store-locator');
+  locator.configureFromQuickBuilder(CONFIGURATION);
+});
         </script>
 </body>
 
